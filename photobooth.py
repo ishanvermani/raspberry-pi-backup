@@ -28,10 +28,12 @@ pygame.camera.init()
 cam = pygame.camera.Camera("/dev/video0", (1600,1200))
 
 
-consumer_key = 'mvW05AGt2N2W0POfDGtYkgNYy'
-consumer_secret = 'HuwTU6pjRbeuWICe7vx6GFPkWrtYYhgWHkDKY1bjWgg3Suuh5l'
-access_key = '756555731898335232-YBTbCNxqHWUF45BHV6WYpyzCGPQht5B'
-access_secret = 'QEZg1HEv6jZo1EgsqSnElVKkEj7XX6XBTUjYCMawdhCl7'
+consumer_key = *
+consumer_secret = *
+access_key = *
+access_secret = *
+
+# Twitter Keys can be found under GAFEphotos Twitter application manager
 
 api = Twython(
     consumer_key,
