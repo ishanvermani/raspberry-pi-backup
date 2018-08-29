@@ -19,10 +19,10 @@ pygame.camera.init()
 cam = pygame.camera.Camera("/dev/video0", (1600,1200))
 
 
-consumer_key = *
-consumer_secret = *
-access_key = *
-access_secret = *
+consumer_key = 'mvW05AGt2N2W0POfDGtYkgNYy'
+consumer_secret = 'HuwTU6pjRbeuWICe7vx6GFPkWrtYYhgWHkDKY1bjWgg3Suuh5l'
+access_key = '756555731898335232-YBTbCNxqHWUF45BHV6WYpyzCGPQht5B'
+access_secret = 'QEZg1HEv6jZo1EgsqSnElVKkEj7XX6XBTUjYCMawdhCl7'
 
 # Twitter Keys can be found under GAFEphotos Twitter application manager
 
@@ -63,7 +63,7 @@ def people(photopath):
     #comment out here to remove keyboard component
     while True:
         username = input("Enter your twitter handles (without the @ sign), separated by a space: ")
-        if len(username) < 240:
+        if len(username) < 140:
             break
         else:
             print('Too Many Characters; Try Again')
@@ -79,7 +79,7 @@ def people(photopath):
             sys.exit()
         elif ask == 'nopic':
             custom = input("Custom message: ")
-            if len(custom) < 111:
+            if len(custom) < 240:
                 api.update_status(status=custom)
             else:
                 upload(photopath)
@@ -99,28 +99,30 @@ def choose_message(photopath):
     length = len(handles)
     if handles == 'ishanisawesome':
         custom = input("Custom Message: ")
-        if len(custom) < 111:
+        if len(custom) < 140:
             os.system('clear')
             print ("Push Button to take picture")
             return custom
         else:
             upload(photopath)
     else:                 
-        if length < 205:
-            message = "Learning a lot today at the CRPS/SEA Custom Summit!! I love this automated photo booth! #RaspberryPi #EdTechTeam" + handles
-            return message
-        elif length < 240:
-            message = "Lots of cool things at #EdTechTeam!" + handles
-            return message
-        elif length < 269:
-            message = '#EdTechTeam' + handles
-            return message
-        else:
-            return handles
+        message_list = ['Learning a lot today at the CRPS/SEA Custom Summit!! I love this automated photo booth! #RaspberryPi #EdTechTeam ',
+        'I LOVE #EdTechTeam and I LOVE #RaspberryPi!!!!! ',
+        'EVERYTHING ABOUT TODAY IS SOOOOOO COOOOOL!!! #EdTechTeam #RaspberryPi ',
+        '#EdTechTeam you rock! #RaspberryPi, you rock! ',
+        'OMGGGGGGGGGGGGGGGGGGGGGGGGGGG <3 #EdTechTeam and #RaspberryPi!!! ']
+    message = random.choice(message_list)
+    joined = message + handles
+    return joined
 # End Cut. Uncomment below
     '''
 def choose_message(photopath):
-    message = "Learning a lot today at the CRPS/SEA Custom Summit!! I love this automated photo booth! #RaspberryPi #EdTechTeam"
+    messages = ["Learning a lot today at the CRPS/SEA Custom Summit!! I love this automated photo booth! #RaspberryPi #EdTechTeam",
+    'I LOVE #EdTechTeam and I LOVE #RaspberryPi!!!!!',
+    'EVERYTHING ABOUT TODAY IS SOOOOOO COOOOOL!!! #EdTechTeam #RaspberryPi',
+    '#EdTechTeam you rock! #RaspberryPi, you rock!',
+    'OMGGGGGGGGGGGGGGGGGGGGGGGGGGG <3 #EdTechTeam and #RaspberryPi!!!']
+    message = random.choice(messages)
     return message
 '''
         
