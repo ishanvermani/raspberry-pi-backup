@@ -4,24 +4,15 @@ import sys
 import pygame
 import pygame.camera
 from pygame.locals import *
-from gpiozero import LED, Button
+from sense_hat import SenseHat, ACTION_RELEASED
 from twython import Twython
 from datetime import datetime
 import random
 from time import sleep
 import os
 
-
-
-button = Button(2)
-five = LED(7)
-four = LED(8)
-three = LED(12)
-two = LED(16)
-one = LED(20)
-ledgo = LED(21)
-
-
+sense = SenseHat()
+white = (255, 255, 255)
 
 pygame.init()
 pygame.camera.init()
@@ -69,9 +60,10 @@ thumsup = [
 ]
    
 def people(photopath):
+    #comment out here to remove keyboard component
     while True:
         username = input("Enter your twitter handles (without the @ sign), separated by a space: ")
-        if len(username) < 111:
+        if len(username) < 240:
             break
         else:
             print('Too Many Characters; Try Again')
@@ -100,8 +92,9 @@ def people(photopath):
         coolio = "".join(handles)
         return coolio
         
-
+# end of cut
 def choose_message(photopath):
+#Cut to to remove keyboard
     handles = people(photopath)
     length = len(handles)
     if handles == 'ishanisawesome':
@@ -113,26 +106,23 @@ def choose_message(photopath):
         else:
             upload(photopath)
     else:                 
-        if length < 63:
-            message = "Learning a lot today at the Calgary #gafesummit!" + handles
+        if length < 205:
+            message = "Learning a lot today at the CRPS/SEA Custom Summit!! I love this automated photo booth! #RaspberryPi #EdTechTeam" + handles
             return message
-        elif length < 77:
-            message = "Lots of cool things at #gafesummit!" + handles
+        elif length < 240:
+            message = "Lots of cool things at #EdTechTeam!" + handles
             return message
-        elif length < 83:
-            message = "Having fun today at #gafesummit!" + handles
-            return message
-        elif length < 89:
-            message = "#gafesummit is awesome!" + handles
-            return message
-        elif length < 92:
-            message = "At #gafesummit with" + handles
-            return message
-        elif length < 100:
-            message = '#gafesummit' + handles
+        elif length < 269:
+            message = '#EdTechTeam' + handles
             return message
         else:
             return handles
+# End Cut. Uncomment below
+    '''
+def choose_message(photopath):
+    message = "Learning a lot today at the CRPS/SEA Custom Summit!! I love this automated photo booth! #RaspberryPi #EdTechTeam"
+    return message
+'''
         
 def upload(photopath):
     message = choose_message(photopath)
@@ -154,30 +144,39 @@ def capture():
     image = cam.get_image()
     pygame.image.save(image, photopath)
     cam.stop()
-    ledgo.off()
+    sense.clear()
     upload(photopath)
 
 def light_show():
     os.system("clear")
-    five.on()
+    sense.show_letter("5", white)
     sleep(1)
-    five.off()
-    four.on()
+    sense.show_letter("4", white)
     sleep(1)
-    four.off()
-    three.on()
+    sense.show_letter("3", white)
     sleep(1)
-    three.off()
-    two.on()
+    sense.show_letter("2", white)
     sleep(1)
-    two.off()
-    one.on()
+    sense.show_letter("1", white)
     sleep(1)
-    one.off()
-    ledgo.on()
-    capture()           
-while True:
-    button.when_pressed = light_show
-    pause()
-
+    for x in range (0, 8):
+        for y in range(0, 8):
+            sense.set_pixel(x, y, 0, 255, 0)
+    capture()  
     
+    
+def trigger(event):
+    if event.action != ACTION_RELEASED:
+        light_show()
+
+sense.stick.direction_any = trigger
+
+
+try:
+    while True:
+        pass
+except KeyboardInterrupt:
+    pass
+finally:
+    sense.clear()
+    os.system("clear")
