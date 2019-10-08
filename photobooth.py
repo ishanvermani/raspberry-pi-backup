@@ -1,3 +1,22 @@
+"""
+Raspberry Pi Powered Photo Booth
+
+Involves a USB Webcam, LED's, and the Twython python library
+
+Functions for 
+-activating LEDs
+-capturing images 
+-promting users for thier twitter handles 
+-generating an additional message based off the length of inputted message
+-uploading combined image and message to twitter using Twitter Authentication Services and the Twython API
+
+August 2015 for the Calgary GAFESummit at Rundle College
+"""
+
+
+
+
+
 #!/usr/bin/python3
 from signal import pause
 import sys
