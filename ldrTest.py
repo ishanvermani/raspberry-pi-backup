@@ -1,3 +1,7 @@
+'''
+Mini project testing a Light Detecting Resistor with a Raspberry Pi GPIO input
+'''
+
 #/usr/bin/python
 from gpiozero import LightSensor
 
