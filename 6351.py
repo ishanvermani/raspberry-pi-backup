@@ -1,3 +1,8 @@
+'''
+Programming a Raspberry Pi Sense hat to display symbols and the number '6351' in varying manners
+'''
+
+
 #/usr/lib/python3
 from sense_hat import SenseHat
 from random import randint
