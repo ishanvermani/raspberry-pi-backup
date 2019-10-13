@@ -1,3 +1,7 @@
+'''
+Project created to experiment with the Joystick on the Raspberry Pi Sense hat. It moves a pixel depending on the direction inputted
+'''
+
 from sense_hat import SenseHat, ACTION_RELEASED
 from time import sleep
 sense = SenseHat()
