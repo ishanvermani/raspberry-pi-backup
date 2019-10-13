@@ -1,3 +1,6 @@
+'''
+Project experimenting with the gyroscope of a rapsberry pi sense HAT
+'''
 from sense_hat import SenseHat
 from time import sleep
 sense = SenseHat()
